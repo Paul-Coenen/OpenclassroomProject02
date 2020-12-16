@@ -12,16 +12,25 @@ import java.util.List;
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
+	/** 
+	 * The file's path of the must-be-read file
+	 */
 	private String filepath;
 	
 	/**
-	 * 
+	 * Constructor ReadSymptomDataFromFile
+	 * When created an instance of ReadSymptomDataFromFile is initialize to point to the file containing the list 
+	 * of symptoms
 	 * @param filepath a full or partial path to file with symptom strings in it, one per line
 	 */
 	public ReadSymptomDataFromFile (String filepath) {
 		this.filepath = filepath;
 	}
 	
+	/**
+	 * Read the file containing the list of symptoms (one per line) and set each of them in a list of String 
+	 * @return The list of String describing the symptoms
+	 */
 	@Override
 	public List<String> GetSymptoms() {
 		ArrayList<String> result = new ArrayList<String>();
