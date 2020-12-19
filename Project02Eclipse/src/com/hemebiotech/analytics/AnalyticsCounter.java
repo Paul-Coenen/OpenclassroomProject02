@@ -2,25 +2,53 @@ package com.hemebiotech.analytics;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+
 public class AnalyticsCounter {
 
 	public static void main(String[] args) {
 		
-		ReadSymptomDataFromFile myReader = new ReadSymptomDataFromFile("C:/Users/coenen/OpenClassRoom/OpenclassroomProject02/Project02Eclipse/symptoms.txt");
-		List<String> myList = myReader.GetSymptoms();
+		final String kPath= "symptoms.txt"; //"C:/Users/coenen/OpenClassRoom/OpenclassroomProject02/Project02Eclipse/symptoms.txt";
+		final String kOutFile = "results.out";
 		
-		CountSymptomFromList myCounter = new CountSymptomFromList();
+		AnalyticsCounter myAnalytics = new AnalyticsCounter();
 		
-		List<Symptom> myAnalysis = new ArrayList<Symptom>();
-		myAnalysis = myCounter.countSymptom(myList);
+		List<String> myListSymptom = new ArrayList<String>();
+		myListSymptom=myAnalytics.reader(kPath);
 		
-		SorterSymptome mySorter = new SorterSymptome();
-		mySorter.sortSymptom(myAnalysis);
 		
-		for(Symptom sym : myAnalysis) {
-			System.out.println(sym.getName()+"\t\t\t\t"+sym.getNumberCase());
-		}
+		Map<String, Integer> symptoms = new HashMap<String,Integer>();	
+		symptoms=myAnalytics.counter(myListSymptom);
+		
+		Map<String, Integer> mySortedSymptoms = new HashMap<String, Integer>();
+		mySortedSymptoms=myAnalytics.sorter(symptoms);
+		
+		myAnalytics.writer(mySortedSymptoms, kOutFile);
 	}
 
+	
+	
+	private List<String> reader(String path) {
+		ReadSymptomDataFromFile myReader = new ReadSymptomDataFromFile(path);
+		return myReader.GetSymptoms();
+		
+	}
+	
+	private Map<String, Integer> counter (List<String> symptomsRead){
+		CountSymptomFromList myCounter = new CountSymptomFromList();
+		return myCounter.countSymptom(symptomsRead);
+	}
+	
+	private Map<String, Integer> sorter (Map <String, Integer> countedSymptoms){
+		SorterSymptome mySorter = new SorterSymptome();
+		return mySorter.sortSymptom(countedSymptoms);
+	}
+	
+	private void writer(Map<String,Integer> sortedSymptoms, String fileName) {
+		WriteSymptomAnalysedToFile myWriter = new WriteSymptomAnalysedToFile();
+		myWriter.writeAnaliticsToFile(sortedSymptoms, fileName);
+	}
 }
