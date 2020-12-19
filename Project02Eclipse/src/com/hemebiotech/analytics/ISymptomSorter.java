@@ -3,18 +3,20 @@
  */
 package com.hemebiotech.analytics;
 
-import java.util.List;
+import java.util.Map;
 
 /**
- * Anything that will sort the elements of a list of Symptom objects
+ * Anything that will sort the elements of a hashMap.
  *
  */
 public interface ISymptomSorter {
 	
 	/**
-	 * Sort a list of Symptom objects according to one or more defined criteria
-	 * @param symptoms : The list to be sorted.
+	 * Sorts any hashMap by using the transformation of the hashmap into a treemap which is returned
+	 * @param countedSymptom : The hashmap to be sorted.
+	 * 
+	 * @return : the treemap cloned from countedSymptom  
 	 */
-	void sortSymptom(List <Symptom> symptoms);
+	Map <String, Integer> sortSymptom(Map <String,Integer> countedSymptoms);
 
 }
