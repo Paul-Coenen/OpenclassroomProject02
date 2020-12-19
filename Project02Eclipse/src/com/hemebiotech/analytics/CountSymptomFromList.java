@@ -1,8 +1,8 @@
 package com.hemebiotech.analytics;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 
 /**
@@ -12,54 +12,29 @@ import java.util.List;
  */
 public class CountSymptomFromList implements ISymptomCounter  {
 
-	/**
-	 *  The list of Symptom  which contains every Symptom object created at the first appearing and increased 
-	 *  each time it appears after.<br>
-	 *  This only can be modified by findSymptom method. 
-	 *  @see Symptom  
-	 *  
-	 */
-	private List<Symptom> listSymptom = new ArrayList<Symptom>();
 	
 	/**
-	 * Read the list of String containing the name of side effect and count the number of case each occurrence appears
-	 * The result is saved as a list of Symptom objects 
-	 * @param symptomsRead : The list of String containing the side effect. 
-	 * 					The list of String containing the name of side effect.
-	 * @return The list of Symptom object which contains the result of the case count
+	 * Read the list of String containing the appeared symptoms and count the number of cases each occurrence appears
+	 * The result is saved as a hashmap whose key is the symptom's name and the value is the number of appearings'. 
+	 * @param appearingSymptoms : The list of String containing the appeared side effects (symptom). One element means one appearing.  
+	 * 					
+	 * @return The map containing the result of the cases counting (Symptom's name / Number of appearings as the key/value)
 	 */
-	@Override
-	public List<Symptom> countSymptom(List<String> symptomsRead) {
+	
+	public Map<String,Integer> countSymptom(List<String> appearingSymptoms) {
+		Map<String, Integer> countedSymptoms = new HashMap<String, Integer>();
 		
-		for (String occurrence : symptomsRead) {
-			if (!findSymptom(occurrence)) {
-				listSymptom.add(new Symptom(occurrence));
+		for (String occurrence : appearingSymptoms) {
+			if (countedSymptoms.containsKey(occurrence)) {		
+				// The symptom already exists => This is not the first appearing -> Value = value + 1
+				countedSymptoms.put(occurrence, countedSymptoms.get(occurrence)+1);
+			}
+			else {	// first appearing's symptom => value = 1
+				countedSymptoms.put(occurrence, 1);
 			}
 		}
 		
-		return listSymptom;
-	}
-	
-	/**
-	 * Compare a String containing the name of the side effect to each name of Symptom included in listSymptom 
-	 * @param occurrence : The name of the side effect to be compared.
-	 * @return true if the name allready exists <br>
-	 * 		   false if not	 
-	 */
-	private boolean findSymptom(String occurrence) {
-		
-		boolean isFind = false;
-		
-		for (Symptom sym : listSymptom) {
-			// le test sym.getName()==occurrence ne fonctionne pas car il compare les adresses et non les chaines...
-			if (sym.getName().equals(occurrence)) {
-				sym.increaseCase();
-				isFind=true;
-				continue;
-			}
-		}
-		
-		return isFind;	
+		return countedSymptoms;
 	}
 	
 }

@@ -3,18 +3,21 @@
  */
 package com.hemebiotech.analytics;
 
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Coenen
  * 
- * Anything that will count symptom from a list of String describing symptoms
- * The important part is, the return value from the operation, which is a list of Symptom. @see Symptom
- * Each Symptom of the list is a unique (not the same name twice).
+ * Anything that will count symptoms from a list of String describing symptoms
+ * The important part is, the return value from the operation, which is a map whose key is the symptom's name
+ * and the value, the number of cases.
  * 
- * The implementation does not need to sort the list
+ * 
+ * The implementation does not need to sort the map
  */
 public interface ISymptomCounter {
-	List<Symptom> countSymptom (List<String> symptomsRead);
+	Map<String, Integer> countSymptom (List<String> appearingSymptoms);
 
 }
