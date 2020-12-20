@@ -11,14 +11,13 @@ public class AnalyticsCounter {
 
 	public static void main(String[] args) {
 		
-		final String kPath= "symptoms.txt"; //"C:/Users/coenen/OpenClassRoom/OpenclassroomProject02/Project02Eclipse/symptoms.txt";
+		final String kDataSource= "symptoms.txt"; 
 		final String kOutFile = "results.out";
 		
 		AnalyticsCounter myAnalytics = new AnalyticsCounter();
 		
 		List<String> myListSymptom = new ArrayList<String>();
-		myListSymptom=myAnalytics.reader(kPath);
-		
+		myListSymptom=myAnalytics.reader(kDataSource);
 		
 		Map<String, Integer> symptoms = new HashMap<String,Integer>();	
 		symptoms=myAnalytics.counter(myListSymptom);
@@ -38,17 +37,17 @@ public class AnalyticsCounter {
 	}
 	
 	private Map<String, Integer> counter (List<String> symptomsRead){
-		CountSymptomFromList myCounter = new CountSymptomFromList();
-		return myCounter.countSymptom(symptomsRead);
+		CountSymptomsFromList myCounter = new CountSymptomsFromList();
+		return myCounter.countSymptoms(symptomsRead);
 	}
 	
 	private Map<String, Integer> sorter (Map <String, Integer> countedSymptoms){
-		SorterSymptome mySorter = new SorterSymptome();
-		return mySorter.sortSymptom(countedSymptoms);
+		SortSymptoms mySorter = new SortSymptoms();
+		return mySorter.sortSymptoms(countedSymptoms);
 	}
 	
 	private void writer(Map<String,Integer> sortedSymptoms, String fileName) {
-		WriteSymptomAnalysedToFile myWriter = new WriteSymptomAnalysedToFile();
-		myWriter.writeAnaliticsToFile(sortedSymptoms, fileName);
+		WriteSymptomAnalysisToFile myWriter = new WriteSymptomAnalysisToFile();
+		myWriter.writeAnalysisToFile(sortedSymptoms, fileName);
 	}
 }

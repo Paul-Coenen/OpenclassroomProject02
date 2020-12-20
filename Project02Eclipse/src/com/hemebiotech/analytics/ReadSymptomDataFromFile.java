@@ -19,7 +19,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	
 	/**
 	 * Constructor ReadSymptomDataFromFile
-	 * When created an instance of ReadSymptomDataFromFile is initialize to point to the file containing the list 
+	 * When it's created an instance of ReadSymptomDataFromFile is initialize to point to the file containing the list 
 	 * of symptoms
 	 * @param filepath a full or partial path to file with symptom strings in it, one per line
 	 */

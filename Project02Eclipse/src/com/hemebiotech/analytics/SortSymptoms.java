@@ -7,7 +7,7 @@ import java.util.TreeMap;
  * Simple brut force implementation
  *
  */
-public class SorterSymptome implements ISymptomSorter {
+public class SortSymptoms implements ISymptomSorter {
 
 	/**
 	 * Sort the hashMap containing the appeared symptoms according to the name of them.
@@ -15,10 +15,10 @@ public class SorterSymptome implements ISymptomSorter {
 	 * 
 	 *  @param countedSymptoms : the hashmap to be sorted
 	 *  
-	 *  @return: the treemap cloned from countedSymptom
+	 *  @return: the treemap cloned from countedSymptoms
 	 */
 	@Override
-	public Map<String, Integer> sortSymptom(Map<String,Integer> countedSymptoms) {
+	public Map<String, Integer> sortSymptoms(Map<String,Integer> countedSymptoms) {
 		
 		Map<String, Integer> sortedSymptoms = new TreeMap<>(countedSymptoms);
 		

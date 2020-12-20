@@ -10,7 +10,7 @@ import java.util.Map;
  * Simple brut force implementation
  * 	
  */
-public class CountSymptomFromList implements ISymptomCounter  {
+public class CountSymptomsFromList implements ISymptomCounter  {
 
 	
 	/**
@@ -21,7 +21,8 @@ public class CountSymptomFromList implements ISymptomCounter  {
 	 * @return The map containing the result of the cases counting (Symptom's name / Number of appearings as the key/value)
 	 */
 	
-	public Map<String,Integer> countSymptom(List<String> appearingSymptoms) {
+	public Map<String,Integer> countSymptoms(List<String> appearingSymptoms) {
+		
 		Map<String, Integer> countedSymptoms = new HashMap<String, Integer>();
 		
 		for (String occurrence : appearingSymptoms) {
