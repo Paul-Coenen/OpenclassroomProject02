@@ -1,8 +1,8 @@
 package com.hemebiotech.analytics;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 
 /**
@@ -23,7 +23,7 @@ public class CountSymptomsFromList implements ISymptomCounter  {
 	
 	public Map<String,Integer> countSymptoms(List<String> appearingSymptoms) {
 		
-		Map<String, Integer> countedSymptoms = new HashMap<String, Integer>();
+		Map<String, Integer> countedSymptoms = new TreeMap<String, Integer>();
 		
 		for (String occurrence : appearingSymptoms) {
 			if (countedSymptoms.containsKey(occurrence)) {		

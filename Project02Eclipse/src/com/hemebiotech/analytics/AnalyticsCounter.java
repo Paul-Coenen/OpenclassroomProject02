@@ -2,9 +2,9 @@ package com.hemebiotech.analytics;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 
 public class AnalyticsCounter {
@@ -19,13 +19,10 @@ public class AnalyticsCounter {
 		List<String> myListSymptom = new ArrayList<String>();
 		myListSymptom=myAnalytics.reader(kDataSource);
 		
-		Map<String, Integer> symptoms = new HashMap<String,Integer>();	
-		symptoms=myAnalytics.counter(myListSymptom);
+		Map<String, Integer> myAnalysis = new TreeMap<String,Integer>();	
+		myAnalysis=myAnalytics.counter(myListSymptom);
 		
-		Map<String, Integer> mySortedSymptoms = new HashMap<String, Integer>();
-		mySortedSymptoms=myAnalytics.sorter(symptoms);
-		
-		myAnalytics.writer(mySortedSymptoms, kOutFile);
+		myAnalytics.writer(myAnalysis, kOutFile);
 	}
 
 	
@@ -41,10 +38,6 @@ public class AnalyticsCounter {
 		return myCounter.countSymptoms(symptomsRead);
 	}
 	
-	private Map<String, Integer> sorter (Map <String, Integer> countedSymptoms){
-		SortSymptoms mySorter = new SortSymptoms();
-		return mySorter.sortSymptoms(countedSymptoms);
-	}
 	
 	private void writer(Map<String,Integer> sortedSymptoms, String fileName) {
 		WriteSymptomAnalysisToFile myWriter = new WriteSymptomAnalysisToFile();

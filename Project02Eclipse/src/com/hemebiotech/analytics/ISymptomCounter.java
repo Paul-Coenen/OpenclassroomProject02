@@ -18,6 +18,7 @@ import java.util.Map;
  * The implementation does not need to sort the map
  */
 public interface ISymptomCounter {
+	
 	Map<String, Integer> countSymptoms (List<String> appearingSymptoms);
 
 }
