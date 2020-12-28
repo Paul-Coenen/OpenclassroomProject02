@@ -28,8 +28,10 @@ public class WriteSymptomAnalysisToFile implements ISymptomWriter {
 			}
 			writer.close();
 			
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException  e) {
+			System.err.println(e.getMessage());
+		} catch (NullPointerException e) {
+			System.out.println("Aucun chemin n'est spécifié pour le fichier résultat!");
 		}
 		
 	}

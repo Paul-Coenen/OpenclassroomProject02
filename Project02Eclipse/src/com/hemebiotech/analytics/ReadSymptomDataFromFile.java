@@ -28,15 +28,15 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	}
 	
 	/**
-	 * Read the file containing the list of symptoms (one per line) and set each of them in a list of String 
+	 * Read the file containing the list of symptoms (one per line) and set each of them in a list of String
+	 * If the source file is not accessible (omitted or wrong path), the exception will be thrown. 
 	 * @return The list of String describing the symptoms
 	 */
 	@Override
-	public List<String> GetSymptoms() {
+	public List<String> GetSymptoms() throws IOException, NullPointerException{
 		ArrayList<String> result = new ArrayList<String>();
 		
-		if (filepath != null) {
-			try {
+		
 				BufferedReader reader = new BufferedReader (new FileReader(filepath));
 				String line = reader.readLine();
 				
@@ -44,13 +44,10 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 					result.add(line);
 					line = reader.readLine();
 				}
-				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+				
+			reader.close();
 		
-		return result;
+		return result;	
 	}
 
 }
