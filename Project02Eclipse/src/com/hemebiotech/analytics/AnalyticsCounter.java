@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+
 /**
  * AnalysticsCounter is the class that allows you to analyze the side effects related to the use of certain drugs
  * From a list of symptoms contained in a text file, this counts the number of occurrences of thes symptoms.
@@ -38,7 +39,6 @@ public class AnalyticsCounter {
 		List<String> myListSymptom = new ArrayList<String>();
 		try {
 			myListSymptom=myAnalytics.reader(kDataSource);
-
 			
 			if (myListSymptom.size()!=0) {	//The source file has been read and isn't empty
 			
@@ -47,21 +47,21 @@ public class AnalyticsCounter {
 			
 			myAnalytics.writer(myAnalysis, kOutFile);
 			
+			System.out.println("Le traitement est terminé!\nLe résultat est enregistré dans le fichier "+kOutFile);
 			} else {	// The source file was empty
-				System.out.println("Le fichier de symptomes est vide !");
+				System.out.println("Le fichier de symptômes est vide !");
 			}
 		
-		} catch (IOException e) {
 			
-			System.out.println("Le fichier " + kDataSource + " est introuvable!");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
 			
 		} catch (NullPointerException e) {
-			System.out.println("Aucun chemin n'est spécifié pour le fichier de symptomes!");
-			
+			System.out.println(e.getMessage());
 		}
-		
 
 	}
+
 
 	/**
 	 * Read the source file containing the symptom and set it in a list of string
@@ -72,7 +72,7 @@ public class AnalyticsCounter {
 	 * @throws NullPointerException : The path was null
 	 */
 	
-	private List<String> reader(String path) throws IOException, NullPointerException {
+	private List<String> reader(String path) throws IOException,NullPointerException {
 		ReadSymptomDataFromFile myReader  = new ReadSymptomDataFromFile(path);
 			
 		return myReader.GetSymptoms();
@@ -95,9 +95,10 @@ public class AnalyticsCounter {
 	 * Write the result of the frequency symptom occurence analysis in an output file.
 	 * @param sortedSymptoms : the Map containing the result with de symptom's name as the key and the number of occurence as the value.
 	 * @param fileName : a full or partial path to the file in which the result must be written. If the path is invalid or null, the
-	 * 					exception is handled by the WriteSumptomAnalysisToFile class. 
+	 * @throws IOException : The fileName is not valid.
+	 * @throws NullPointerException : The fileName was omitted 
 	 */
-	private void writer(Map<String,Integer> sortedSymptoms, String fileName) {
+	private void writer(Map<String,Integer> sortedSymptoms, String fileName) throws IOException, NullPointerException {
 		WriteSymptomAnalysisToFile myWriter = new WriteSymptomAnalysisToFile();
 		myWriter.writeAnalysisToFile(sortedSymptoms, fileName);
 	}

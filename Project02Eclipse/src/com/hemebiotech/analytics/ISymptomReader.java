@@ -19,5 +19,6 @@ public interface ISymptomReader {
 	 * 
 	 * @return a raw listing of all Symptoms obtained from a data source, duplicates are possible/probable
 	 */
-	List<String> GetSymptoms () throws IOException, NullPointerException;
+	List<String> GetSymptoms ()
+		throws IOException, NullPointerException;
 }

@@ -18,8 +18,10 @@ public class WriteSymptomAnalysisToFile implements ISymptomWriter {
 	 * 
 	 *  @param sortedSymptoms : the Map containing the result with de symptom's name as the key and the number of occurence as the value.
 	 *  @param fileName : a full or partial path to the file in which the result must be written.
+	 *  @throws IOException : fileName is not valid.
+	 *  @throws NullPointerException : fileName was omitted.
 	 */
-	public void writeAnalysisToFile(Map<String, Integer> sortedSymptoms,String fileName) {
+	public void writeAnalysisToFile(Map<String, Integer> sortedSymptoms,String fileName) throws IOException, NullPointerException{
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
 			
@@ -29,9 +31,12 @@ public class WriteSymptomAnalysisToFile implements ISymptomWriter {
 			writer.close();
 			
 		} catch (IOException  e) {
-			System.err.println(e.getMessage());
+			String errorMessage = "Ecriture impossible sur le fichier "+ fileName;
+			throw new IOException(errorMessage);
+			
 		} catch (NullPointerException e) {
-			System.out.println("Aucun chemin n'est spécifié pour le fichier résultat!");
+			String errorMessage = "Aucun chemin n'a été spécifié pour le fichier résultat!";
+			throw new NullPointerException(errorMessage);
 		}
 		
 	}

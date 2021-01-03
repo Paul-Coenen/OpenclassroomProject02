@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Simple brute force implementation
  *
@@ -31,12 +32,15 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	 * Read the file containing the list of symptoms (one per line) and set each of them in a list of String
 	 * If the source file is not accessible (omitted or wrong path), the exception will be thrown. 
 	 * @return The list of String describing the symptoms
+	 * @throws IOException : The filePath is not valid
+	 * @throws NullPointerException : The filePath was omitted.
 	 */
 	@Override
-	public List<String> GetSymptoms() throws IOException, NullPointerException{
+	public List<String> GetSymptoms() throws IOException, NullPointerException {
+		
 		ArrayList<String> result = new ArrayList<String>();
 		
-		
+			try {
 				BufferedReader reader = new BufferedReader (new FileReader(filepath));
 				String line = reader.readLine();
 				
@@ -45,7 +49,15 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 					line = reader.readLine();
 				}
 				
-			reader.close();
+				reader.close();
+			} catch (IOException e) {
+				String errorMessage = "Le fichier " + filepath + " est inaccessible!";
+				throw new IOException(errorMessage);
+				
+			}catch (NullPointerException e) {
+				String errorMessage = "Aucun chemin n'a été spécifié pour le fichier de symptômes!";
+				throw new NullPointerException(errorMessage);
+			}
 		
 		return result;	
 	}
